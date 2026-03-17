@@ -52,6 +52,44 @@ DB_PATH=messages.db
 python main.py
 ```
 
+## Docker 部署（云服务器）
+
+### 1. 在服务器上克隆项目
+
+```bash
+git clone <your-repo-url>
+cd telegram_info_seeker
+```
+
+### 2. 配置环境变量
+
+```bash
+cp .env.example .env
+# 编辑 .env 填入 BOT_TOKEN 等配置
+```
+
+### 3. 启动
+
+```bash
+docker compose up -d --build
+```
+
+### 常用命令
+
+```bash
+# 查看日志
+docker compose logs -f
+
+# 停止
+docker compose down
+
+# 重启
+docker compose restart
+
+# 备份数据库
+docker cp $(docker compose ps -q bot):/app/data/messages.db ./messages_backup.db
+```
+
 ## 数据库结构
 
 消息保存在 `messages.db` 的 `messages` 表中：
